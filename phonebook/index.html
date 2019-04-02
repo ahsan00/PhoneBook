@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>My Mini PhoneBook Project</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="container">
+        <h1 class="fleft">User List</h1>
+        <button class="fright addnew" @click="showaddmodal=true;">Add new</button>
+        <div class="clear">
+        </div>
+        <hr>
+        <p class="errormessage" v-if="errormessage">
+         {{errormessage}}
+
+        </p>
+        <p class="sucessmessage" v-if="sucessmessage">
+         {{sucessmessage}}
+
+        </p>
+
+
+
+
+        <table class="list">
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Mobile</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+          <tr v-for="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobile}}</td>
+            <td><button type="button" name="button"@click="showeditmodal=true; selectuser(user)">Edit</button></td>
+            <td><button type="button" name="button"@click="showdeletemodal=true; selectuser(user)">Delete</button></td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="modal"  v-if="showaddmodal">
+
+        <div class="modalbody">
+          <div class="modalheading">
+            <p class="fleft">Add new contact</p>
+            <button class="fright close" @click="showaddmodal=false;">X</button>
+            <div class="clear">
+
+            </div>
+          </div>
+          <div class="modalcontent">
+            <table class="form">
+              <tr>
+                <th>Name</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="newuser.name"></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="newuser.email"></></td>
+              </tr>
+              <tr>
+                <th>Mobile No</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="newuser.mobile"></></td>
+              </tr>
+              <tr>
+                <th></th>
+                <th></th>
+                <td><button @click="showaddmodal=false; saveuser();">Save</button></td>
+              </tr>
+
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal"  v-if="showeditmodal">
+
+        <div class="modalbody">
+          <div class="modalheading">
+            <p class="fleft">Update Your User Info</p>
+            <button class="fright close" @click="showeditmodal=false;">X</button>
+            <div class="clear">
+
+            </div>
+          </div>
+          <div class="modalcontent">
+            <table class="form">
+              <tr>
+                <th>Name</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="edituser.name"></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="edituser.email"></td>
+              </tr>
+              <tr>
+                <th>Mobile No</th>
+                <th>:</th>
+                <td><input type="text" name="" v-model="edituser.mobile"></td>
+              </tr>
+              <tr>
+                <th></th>
+                <th></th>
+                <td><button @click="showeditmodal=false;updateuser()">Save</button></td>
+              </tr>
+
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal"  v-if="showdeletemodal">
+
+        <div class="modalbody">
+          <div class="modalheading">
+            <p class="fleft">Update Your User Info</p>
+            <button class="fright close" @click="showdeletemodal=false;">X</button>
+            <div class="clear">
+
+            </div>
+          </div>
+          <div class="modalcontent">
+          <p>you are going to delete this user</p>
+          <br><br><br><br>
+          <button type="button" name="button"@click="showdeletemodal=false; deleteuser()">Yes</button>
+          <button type="button" name="button"@click="showdeletemodal=false;">No</button>
+
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+   <script type="text/javascript" src="axios.js"></script>
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+
+  </body>
+</html>
